@@ -1,6 +1,6 @@
 {
   "name": "prepend-selector-postcss",
-  "version": "0.4.3",
+  "version": "0.4.2",
   "description": "PostCSS plugin Prepend selector for each rule. Optional exclude rules to prevent prepending 2021",
   "keywords": [
     "postcss",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/filefabrik/prepend-selector-postcss",
   "dependencies": {
-    "postcss": "^7.0.35"
+    "postcss": "^8.2.10"
   },
   "devDependencies": {
     "ava": "^3.15.0",
