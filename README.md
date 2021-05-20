@@ -2,12 +2,15 @@
 
 [PostCSS] plugin Prepend selector for each rule with optional exclude existing selector from prepending.
 
-[PostCSS]: https://github.com/postcss/postcss
+[PostCSS]: Version 7 https://github.com/postcss/postcss
+
 
 ## The intention
 
 The intention I had extended the plugin to create a user interface for the web using Vue-js and styled it with Tailwind-css. The Vue-js panel was
 integrated into an existing website/application. So the styles created with Tailwind-css should be used exclusively in the Vue-js application.
+
+That means this plugin is not really well developed. However, it serves its purpose without claiming to be a really well-tested script.
 
 ## Usage in postcss.config.js with  prepend-selector-postcss
 
