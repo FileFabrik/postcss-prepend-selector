@@ -1,9 +1,9 @@
-import postcss from 'postcss';
-import test from 'ava';
+const test = require('ava');
+const postcss = require('postcss');
 
-import plugin from './';
+const plugin = require('./index');
 
-function run(t, input, output, opts = {}) {
+function runTest(t, input, output, opts = {}) {
     return postcss([plugin(opts)]).process(input)
         .then(result => {
             t.is(result.css, output);
@@ -14,22 +14,26 @@ function run(t, input, output, opts = {}) {
 const selector = '.selector ';
 
 test('Prepend selector', t =>
-  run(t, 'a{ }', '.selector a{ }', { selector })
+    runTest(t, 'a{ }', '.selector a{ }', { selector })
 );
 
 test('Prepend selectors', t =>
-  run(t, 'a, .example{ }', '.selector a, .selector .example{ }', { selector })
+    runTest(t, 'a, .example{ }', '.selector a, .selector .example{ }'
+        , { selector })
 );
 
 test('Should not prepend if class is already there', t =>
-  run(t, '.selector.example{ }', '.selector.example{ }', { selector })
+    runTest(t, '.selector.example{ }', '.selector.example{ }'
+        , { selector })
 );
 
 test('Skip keyframe rules', t =>
-  run(t, '0%, from {} 100%, to {}', '0%, from {} 100%, to {}', { selector })
+    runTest(t, '0%, from {} 100%, to {}', '0%, from {} 100%, to {}'
+        , { selector })
 );
 
 test('Skip numerical values with decimal in keyframes', t =>
-  run(t, '@keyframes name{0%{}.5%{}0.9%{}10.10%{}20.1%{}100%{}}',
-        '@keyframes name{0%{}.5%{}0.9%{}10.10%{}20.1%{}100%{}}', { selector })
+    runTest(t, '@keyframes name{0%{}.5%{}0.9%{}10.10%{}20.1%{}100%{}}',
+        '@keyframes name{0%{}.5%{}0.9%{}10.10%{}20.1%{}100%{}}'
+        , { selector })
 );
