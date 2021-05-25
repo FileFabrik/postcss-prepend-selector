@@ -1,3 +1,4 @@
+# 0.4.4 (2021-05-25) update dependency to postcss 8.2.13 version bump
 # 0.4.3 (2021-05-20) update dependency to postcss 7.0.35
 # 0.4.3 (2021-05-20) reactivating the old ava-test, but without new tests
 # 0.4.2 (2021-05-19) docu extended with tailwind postcss example
