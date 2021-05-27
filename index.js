@@ -6,6 +6,18 @@ module.exports = postcss.plugin('prepend-selector-postcss', function (opts) {
     opts.exclude = !opts.exclude ? null : opts.exclude;
     opts.excludePart = !opts.excludePart ? null : opts.excludePart;
     opts.excludeTag = !opts.excludeTag ? null : opts.excludeTag;
+    /*
+ * for modernizer scripts html { resets everything} make
+ * appendTag:['html','body']
+ * to generate html .selector {resets everything}
+* */
+    opts.appendTo = !opts.appendTo ? null : opts.appendTo;
+    /** *
+     *
+     * @type {null|*}
+     */
+    opts.makeInvalid = !opts.makeInvalid ? null : opts.makeInvalid;
+
     return function (css) {
         css.walkRules(function (rule) {
             rule.selectors = rule.selectors.map(function (selector) {
@@ -17,6 +29,39 @@ module.exports = postcss.plugin('prepend-selector-postcss', function (opts) {
                 if (selector.startsWith(opts.selector.trim())) {
                     return selector;
                 }
+
+                /** FileFabrik change have ignores
+                 * 'body{ }', 'i_had_made_invalidbody{ }'
+                 **/
+                if (opts.makeInvalid &&
+                    Array.isArray(opts.makeInvalid.selectors)) {
+
+                    let found = false;
+                    opts.makeInvalid.selectors.forEach(
+                        function (invalidateSel) {
+                            if (selector.startsWith(invalidateSel))
+                                found = invalidateSel;
+                            return found;
+                        });
+                    if (found) {
+                        return (opts.makeInvalid.invalidPrefix +
+                            selector).trimEnd();
+                    }
+                }
+
+                /** FileFabrik change have ignores    excludePart: ['.grid'] **/
+                if (opts.appendTo && Array.isArray(opts.appendTo)) {
+                    let found = false;
+                    opts.appendTo.forEach(function (appendTo) {
+                        if (selector.startsWith(appendTo))
+                            found = true;
+                        return found;
+                    });
+                    if (found) {
+                        return (selector + ' ' + opts.selector).trimEnd();
+                    }
+                }
+
                 /**
                  * todo excluding tag (such as html,body)
                  */
@@ -31,7 +76,7 @@ module.exports = postcss.plugin('prepend-selector-postcss', function (opts) {
                         return selector;
                     }
                 }
-                /** FileFabrik change have ignores    excludePart: ['.grid'] **/
+                /** FileFabrik change have ignores excludePart: ['.grid'] **/
                 if (opts.excludePart && Array.isArray(opts.excludePart)) {
                     let found = false;
                     opts.excludePart.forEach(function (excludePart) {
@@ -42,7 +87,7 @@ module.exports = postcss.plugin('prepend-selector-postcss', function (opts) {
                     if (found)
                         return selector;
                 }
-
+                // default return concat
                 return opts.selector + selector;
             });
         });

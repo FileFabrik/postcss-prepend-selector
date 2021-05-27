@@ -37,3 +37,25 @@ test('Skip numerical values with decimal in keyframes', t =>
         '@keyframes name{0%{}.5%{}0.9%{}10.10%{}20.1%{}100%{}}'
         , { selector })
 );
+
+test('appendTo Tag', t =>
+    runTest(t, 'body{ }', 'body .selector{ }',
+        { appendTo: ['body'], selector: selector }
+    )
+);
+test('appendTo Tag with excludePart first Find appendTo', t =>
+    runTest(t, 'body{ }', 'body .selector{ }',
+        { excludePart: ['body'], appendTo: ['body'], selector: selector }
+    )
+);
+test('make Invalid', t =>
+    runTest(t, 'body{ }', 'i_had_made_invalidbody{ }',
+        {
+            makeInvalid: {
+                selectors:     ['body'],
+                invalidPrefix: 'i_had_made_invalid'
+            },
+            selector: selector
+        }
+    )
+);

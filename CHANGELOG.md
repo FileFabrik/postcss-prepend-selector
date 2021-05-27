@@ -1,3 +1,20 @@
+# 0.4.5 (2021-05-27) config-parameter
+Prefixing special selectors with a string that not exists in html tags to prevent using "body" - selector
+
+`body{some unwanted global reset stuff}`  -> `i_had_made_invalid_body{some unwanted global reset stuff}`
+```json
+makeInvalid: {
+    selectors:     ['body'],
+    invalidPrefix: 'i_had_made_invalid_'
+}
+```
+
+
+# 0.4.5 (2021-05-27) config-parameter
+`appendTo:['body']`
+
+`body{some unwanted global reset stuff}` -> `body .selector{some unwanted global reset stuff}
+`
 # 0.4.4 (2021-05-25) update dependency to postcss 8.2.13 version bump
 # 0.4.3 (2021-05-20) update dependency to postcss 7.0.35
 # 0.4.3 (2021-05-20) reactivating the old ava-test, but without new tests
