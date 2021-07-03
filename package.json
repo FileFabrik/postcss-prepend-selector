@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/filefabrik/prepend-selector-postcss",
   "dependencies": {
-    "postcss": "^7.0.35"
+    "postcss": "^7.0.36"
   },
   "devDependencies": {
     "ava": "^3.15.0",
