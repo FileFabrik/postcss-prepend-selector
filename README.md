@@ -2,7 +2,7 @@
 
 [PostCSS] plugin Prepend selector for each rule with optional exclude existing selector from prepending.
 
-[PostCSS]: Version 7 https://github.com/postcss/postcss
+[PostCSS]: Version 8 https://github.com/postcss/postcss
 
 
 ## The intention

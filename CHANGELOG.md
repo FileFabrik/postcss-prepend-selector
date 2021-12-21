@@ -1,3 +1,4 @@
+# 0.4.7 (2021-12-21) PostCss version to 8.4.*
 # 0.4.4 (2021-05-27) revert dependency to postcss 7.0.35 to get it running with tailwind and build in vue 2
 # 0.4.5 (2021-05-27) config-parameter
 Prefixing special selectors with a string that not exists in html tags to prevent using "body" - selector

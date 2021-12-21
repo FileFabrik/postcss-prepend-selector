@@ -3,20 +3,20 @@ let postcss = require('postcss');
 module.exports = postcss.plugin('prepend-selector-postcss', function (opts) {
 
     opts = opts || {};
-    opts.exclude = !opts.exclude ? null : opts.exclude;
-    opts.excludePart = !opts.excludePart ? null : opts.excludePart;
-    opts.excludeTag = !opts.excludeTag ? null : opts.excludeTag;
+    opts.exclude = opts.exclude ? opts.exclude : null;
+    opts.excludePart = opts.excludePart ? opts.excludePart : null;
+    opts.excludeTag = opts.excludeTag ? opts.excludeTag : null;
     /*
  * for modernizer scripts html { resets everything} make
  * appendTag:['html','body']
  * to generate html .selector {resets everything}
 * */
-    opts.appendTo = !opts.appendTo ? null : opts.appendTo;
+    opts.appendTo = opts.appendTo ? opts.appendTo : null;
     /** *
      *
      * @type {null|*}
      */
-    opts.makeInvalid = !opts.makeInvalid ? null : opts.makeInvalid;
+    opts.makeInvalid = opts.makeInvalid ? opts.makeInvalid : null;
 
     return function (css) {
         css.walkRules(function (rule) {
